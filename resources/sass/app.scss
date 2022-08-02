@@ -1,0 +1,11 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Padauk:wght@400;700&display=swap');
+
+$font-family-sans-serif:  'Montserrat', 'Padauk', sans-serif;
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+$swal2-confirm-button-background-color: $primary;
+@import "~sweetalert2/src/sweetalert2";
+@import "style.css";
