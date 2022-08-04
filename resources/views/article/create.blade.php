@@ -30,6 +30,7 @@
                                                 <option value="">select category</option>
                                                 @foreach($categories as $category)
                                                     <option value="{{ $category->id }}" {{ old('category')==$category->id ? 'selected':'' }}>{{ $category->title }}</option>
+                                                    <input type="hidden" class="" name="slug" value="{{ $category->slug }}">
                                                 @endforeach
                                             </select>
                                             @error('category')

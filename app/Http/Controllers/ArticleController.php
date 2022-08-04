@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -42,13 +44,16 @@ class ArticleController extends Controller
     {
         $request->validate([
             "category"=>"required|exists:categories,id",
+            "slug"=>"required|exists:categories,slug",
             "title"=>"required|min:5|max:100",
             "description"=>"required|min:10"
         ]);
 
         $article = new Article();
         $article->category_id = $request->category;
+        $article->slug_category = $request->slug;
         $article->title = $request->title;
+        $article->slug = Str::slug($request->title).uniqid();
         $article->description = $request->description;
         $article->user_id   = Auth::id();
         $article->save();
@@ -88,10 +93,15 @@ class ArticleController extends Controller
     {
         $request->validate([
             "category"=>"required|exists:categories,id",
+            "slug"=>"required|exists:categories,slug",
             "title"=>"required|min:5|max:100",
             "description"=>"required|min:10"
         ]);
 
+        if($article->title != $request->title){
+            $article->slug = Str::slug($request->title).uniqid();
+        }
+        $article->slug_category = $request->slug;
         $article->category_id = $request->category;
         $article->title = $request->title;
         $article->description = $request->description;

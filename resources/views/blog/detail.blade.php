@@ -2,7 +2,7 @@
 @section('content')
     <div class="py-3">
         <div class="small post-category mb-3">
-            <a href="{{ route('baseOnCategory', $article->getCategory->id) }}" rel="category tag">{{ $article->getCategory->title }}</a>
+            <a href="{{ route('baseOnCategory', $article->slug) }}" rel="category tag">{{ $article->getCategory->title }}</a>
         </div>
 
         <h2 class="fw-bolder">{{ $article->title }}</h2>
@@ -30,7 +30,7 @@
             @endphp
 
             <div class="nav d-flex justify-content-between p-3">
-                <a href="{{ isset($previousArticle->id)? $previousArticle->id : '#' }}"
+                <a href="{{ isset($previousArticle)? $previousArticle->slug : '#' }}"
                    class="btn btn-outline-primary page-mover rounded-circle">
                     <i class="feather-chevron-left"></i>
                 </a>
@@ -39,8 +39,8 @@
                     Read All
                 </a>
 
-                <a href="{{ isset($nextArticle->id)? $nextArticle->id : '#' }}"
-                   class="btn btn-outline-primary page-mover rounded-circle @empty($nextArticle->id) disabled @endempty">
+                <a href="{{ isset($nextArticle)? $nextArticle->slug : '#' }}"
+                   class="btn btn-outline-primary page-mover rounded-circle @empty($nextArticle) disabled @endempty">
                     <i class="feather-chevron-right"></i>
                 </a>
             </div>

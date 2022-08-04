@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
+//        $all = Category::all();
+//        foreach($all as $a){
+//            $a->slug = Str::slug($a->title);
+//        }
         return view('category.index');
     }
 
@@ -42,6 +47,7 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->title = $request->title;
+        $category->slug = Str::slug($request->title);
         $category->user_id = Auth::id();
         $category->save();
         return  redirect()->route('category.index')->with("toast",["icon"=>"success","title"=>"$category->title categroy is added."]);
@@ -83,6 +89,7 @@ class CategoryController extends Controller
         ]);
 
         $category->title = $request->title;
+        $category->slug = Str::slug($request->title);
         $category->update();
         return  redirect()->route('category.index')->with("toast",["icon"=>"success","title"=>"$category->title categroy is Updated."]);
     }
