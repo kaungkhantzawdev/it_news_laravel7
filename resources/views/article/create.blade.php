@@ -29,8 +29,9 @@
                                             <select form="createArticle" name="category" id="" class="custom-select-lg @error('category') is-invalid @enderror custom-select">
                                                 <option value="">select category</option>
                                                 @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}" {{ old('category')==$category->id ? 'selected':'' }}>{{ $category->title }}</option>
-                                                    <input type="hidden" class="" name="slug" value="{{ $category->slug }}">
+                                                    <option value="{{ $category->id }}" {{ old('category')==$category->id ? 'selected':'' }}>
+                                                        {{ $category->title }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('category')

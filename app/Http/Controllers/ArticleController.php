@@ -44,14 +44,13 @@ class ArticleController extends Controller
     {
         $request->validate([
             "category"=>"required|exists:categories,id",
-            "slug"=>"required|exists:categories,slug",
             "title"=>"required|min:5|max:100",
             "description"=>"required|min:10"
         ]);
 
         $article = new Article();
         $article->category_id = $request->category;
-        $article->slug_category = $request->slug;
+        $article->slug_category = Category::find($request->category)->slug;
         $article->title = $request->title;
         $article->slug = Str::slug($request->title).uniqid();
         $article->description = $request->description;
@@ -92,9 +91,9 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+
         $request->validate([
             "category"=>"required|exists:categories,id",
-            "slug"=>"required|exists:categories,slug",
             "title"=>"required|min:5|max:100",
             "description"=>"required|min:10"
         ]);
@@ -102,7 +101,7 @@ class ArticleController extends Controller
         if($article->title != $request->title){
             $article->slug = Str::slug($request->title).uniqid();
         }
-        $article->slug_category = $request->slug;
+        $article->slug_category = Category::find($request->category)->slug;
         $article->category_id = $request->category;
         $article->title = $request->title;
         $article->description = $request->description;
