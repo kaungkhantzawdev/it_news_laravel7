@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
@@ -49,6 +50,7 @@ class ArticleController extends Controller
         $article = new Article();
         $article->category_id = $request->category;
         $article->title = $request->title;
+        $article->excerpt = Str::words($article->description,50);
         $article->description = $request->description;
         $article->user_id   = Auth::id();
         $article->save();
@@ -94,6 +96,7 @@ class ArticleController extends Controller
 
         $article->category_id = $request->category;
         $article->title = $request->title;
+        $article->excerpt = Str::words($article->description,50);
         $article->description = $request->description;
         $article->update();
         return redirect()->route('article.index')->with("toast",['icon'=>'success','title'=>'Successful article is updated']);
