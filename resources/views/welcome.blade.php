@@ -10,11 +10,11 @@
                 </a>
 
                 <div class="small post-category">
-                    <a href="{{ route('baseOnCategory', $article->getCategory->id) }}" rel="category tag">{{ $article->getCategory->title }}</a>
+                    <a href="{{ route('baseOnCategory', $article->slug_category) }}" rel="category tag">{{ $article->slug_category }}</a>
                 </div>
 
-                <div class="text-black-50 the-excerpt mt-3">
-                    <p>
+                <div class="text-black-50 the-excerpt">
+                    <p style="white-space: pre-line">
                         {{Str::words($article->description,50)}}
                     </p>
                 </div>
@@ -32,7 +32,7 @@
                             <span class="small">{{ $article->created_at->format('d F Y') }}</span>
                         </div>
                     </div>
-                    <a href="{{ route('detail', $article->id) }}" class="btn btn-outline-primary rounded-pill px-3">Read More</a>
+                    <a href="{{ route('detail', $article->slug) }}" class="btn btn-outline-primary rounded-pill px-3">Read More</a>
                 </div>
             </div>
         </div>
