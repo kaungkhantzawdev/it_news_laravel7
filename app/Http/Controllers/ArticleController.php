@@ -55,6 +55,7 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->slug = Str::slug($request->title).uniqid();
         $article->description = $request->description;
+        $article->excerpt = Str::words($article->description,50);
         $article->user_id   = Auth::id();
         $article->save();
         return redirect()->route('article.index')->with("toast",['icon'=>'success','title'=>'Successful article is created']);
@@ -105,6 +106,7 @@ class ArticleController extends Controller
         $article->category_id = $request->category;
         $article->title = $request->title;
         $article->description = $request->description;
+        $article->excerpt = Str::words($article->description,50);
         $article->update();
         return redirect()->route('article.index')->with("toast",['icon'=>'success','title'=>'Successful article is updated']);
     }

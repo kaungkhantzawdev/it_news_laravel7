@@ -16,6 +16,7 @@ class AddColoumArticlesTable extends Migration
         Schema::table('articles', function (Blueprint $table) {
             $table->text('slug')->unique()->nullable()->after('title');
             $table->text('slug_category')->nullable()->after('category_id');
+            $table->text('excerpt')->after('description');
         });
     }
 
