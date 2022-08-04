@@ -1,10 +1,7 @@
 <div class="col-12 col-lg-3 col-xl-2 vh-100 sidebar">
     <div class="d-flex justify-content-between align-items-center py-2 mt-3">
         <div class="d-flex align-items-center">
-            <span class="bg-primary p-2 rounded d-flex justify-content-center align-items-center mr-2">
-                <i class="feather-shopping-bag text-white h4 mb-0"></i>
-            </span>
-            <span class="font-weight-bolder h4 mb-0 text-uppercase text-primary">My Shop</span>
+            <img src="{{ asset(\App\Base::$logo) }}" class="w-50" alt="">
         </div>
         <button class="hide-sidebar-btn btn btn-light d-block d-lg-none">
             <i class="feather-x text-primary" style="font-size: 2em;"></i>
@@ -14,9 +11,12 @@
         <ul>
             <x-menu-spacer></x-menu-spacer>
             <x-menu-item link="{{ route('home') }}" class="feather-home" name="Home"></x-menu-item>
-            <x-menu-item class="feather-shopping-bag" name="today orders"></x-menu-item>
-            <x-menu-item class="feather-grid" name="recent items"></x-menu-item>
-            <x-menu-item class="feather-pie-chart" name="data analysis"></x-menu-item>
+            <x-menu-item link="{{ route('index') }}" class="feather-message-circle" name="Go to News"></x-menu-item>
+            <x-menu-spacer></x-menu-spacer>
+
+            <x-menu-title title="articles manager"></x-menu-title>
+            <x-menu-item link="{{ route('article.index') }}" class="feather-list" name="article list"></x-menu-item>
+            <x-menu-item link="{{ route('article.create') }}" class="feather-plus-circle" name="create article"></x-menu-item>
             <x-menu-spacer></x-menu-spacer>
 
             @if(Auth::user()->role == 0)
@@ -24,13 +24,15 @@
             <x-menu-item link="{{ route('user-manager.index') }}" class="feather-users" name="users"></x-menu-item>
             <x-menu-spacer></x-menu-spacer>
             @endif
+            <x-menu-title title="category manager"></x-menu-title>
+            <x-menu-item link="{{ route('category.index') }}" class="feather-layers" name="category manager"></x-menu-item>
+            <x-menu-spacer></x-menu-spacer>
 
             <x-menu-title title="user profile"></x-menu-title>
             <x-menu-item link="{{ route('profile') }}" class="feather-user" name="your profile"></x-menu-item>
             <x-menu-item link="{{ route('profile.update-photo') }}" class="feather-image" name="Update Photo"></x-menu-item>
             <x-menu-item link="{{ route('profile.update-nameEmail') }}" class="feather-message-square" name="Update info"></x-menu-item>
             <x-menu-item link="{{ route('profile.change-password-show') }}" class="feather-refresh-ccw" name="change password"></x-menu-item>
-            <x-menu-item class="feather-server" name="item lists" counter="58"></x-menu-item>
             <x-menu-spacer></x-menu-spacer>
             <li class="menu-item">
                 <a class="btn btn-danger w-100" href="{{ route('logout') }}"

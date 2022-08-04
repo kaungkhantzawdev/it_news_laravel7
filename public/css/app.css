@@ -138,7 +138,9 @@
 }
 
 
-
+table tr td{
+    vertical-align: middle !important;
+}
 
 @media screen and (max-width: 780px){
     .sidebar{

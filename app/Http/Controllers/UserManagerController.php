@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class UserManagerController extends Controller
 {
     public function index(){
-        $users = User::all();
+        $users = User::paginate(7);
         return view('user-manager.index', compact('users'));
     }
     public function makeAdmin(Request $request){

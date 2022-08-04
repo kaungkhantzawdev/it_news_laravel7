@@ -15,7 +15,13 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-                    <button class="btn btn-primary test">click</button>
+
+                        <br>
+                        <br>
+                        {{ Base::$description }}
+                        <br>
+                        <br>
+                    {{ route('article.index',['page'=>1]) }}
                 </div>
             </div>
         </div>

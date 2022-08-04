@@ -13,13 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','BlogController@index')->name('index');
+Route::get('/detail/{id}','BlogController@show')->name('detail');
+Route::get('/category/{id}','BlogController@baseOnCategory')->name('baseOnCategory');
+Route::get('/user/{id}','BlogController@baseOnUser')->name('baseOnUser');
+Route::get('/date/{date}','BlogController@baseOnDate')->name('baseOnDate');
+Route::view('/about','blog.about')->name('about');
 
 Auth::routes();
 
-Route::middleware(["auth","IsBanned"])->group(function(){
+Route::prefix("dashboard")->middleware(["auth","IsBanned"])->group(function(){
     Route::get('/home', 'HomeController@index')->name('home');
     Route::middleware("AdminOnly")->group(function(){
         Route::get('/user-manager', 'UserManagerController@index')->name('user-manager.index');
@@ -28,6 +31,9 @@ Route::middleware(["auth","IsBanned"])->group(function(){
         Route::post('/unBan-user', 'UserManagerController@unBanUser')->name('user-manager.unBanUser');
         Route::post('/change-password', 'UserManagerController@changePassword')->name('user-manager.changePassword');
     });
+
+    Route::resource('/category','CategoryController');
+    Route::resource('/article','ArticleController');
 
     Route::prefix('profile')->group(function (){
         Route::get('/', 'ProfileController@index')->name('profile');
